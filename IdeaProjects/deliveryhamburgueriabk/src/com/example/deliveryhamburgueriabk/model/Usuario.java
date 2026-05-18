@@ -1,4 +1,4 @@
-package model;
+package com.example.deliveryhamburgueriabk.model;
 
 public class Usuario {
 

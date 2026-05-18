@@ -1,4 +1,6 @@
-package model;
+package com.example.deliveryhamburgueriabk.model;
+
+import com.example.deliveryhamburgueriabk.model.Produto;
 
 public class ItemPedido {
 

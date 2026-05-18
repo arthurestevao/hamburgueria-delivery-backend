@@ -1,5 +1,5 @@
-package service;
-import model.Usuario;
+package com.example.deliveryhamburgueriabk.service;
+import com.example.deliveryhamburgueriabk.model.Usuario;
 
 public class UsuarioService {
 

@@ -1,7 +1,8 @@
-package model;
+package com.example.deliveryhamburgueriabk.model;
 
-import enums.FormaPagamento;
-import enums.StatusPedido;
+import com.example.deliveryhamburgueriabk.enums.FormaPagamento;
+import com.example.deliveryhamburgueriabk.enums.StatusPedido;
+
 import java.util.ArrayList;
 import java.util.List;
 
