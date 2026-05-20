@@ -1,4 +1,4 @@
-package com.example.deliveryhamburgueriabk.model;
+package deliveryhamburgueriabk.model;
 
 import com.example.deliveryhamburgueriabk.model.Produto;
 

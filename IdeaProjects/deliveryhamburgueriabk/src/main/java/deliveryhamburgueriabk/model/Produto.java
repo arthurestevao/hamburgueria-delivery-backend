@@ -1,4 +1,4 @@
-package com.example.deliveryhamburgueriabk.model;
+package deliveryhamburgueriabk.model;
 
 public class Produto {
 

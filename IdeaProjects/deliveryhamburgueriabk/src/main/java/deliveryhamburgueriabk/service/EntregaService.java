@@ -1,4 +1,4 @@
-package com.example.deliveryhamburgueriabk.service;
+package deliveryhamburgueriabk.service;
 
 public class EntregaService {
     public void realizarEntrega() {

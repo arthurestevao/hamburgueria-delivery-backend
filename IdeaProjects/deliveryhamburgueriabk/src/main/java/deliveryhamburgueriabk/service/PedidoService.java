@@ -1,5 +1,5 @@
-package com.example.deliveryhamburgueriabk.service;
-import com.example.deliveryhamburgueriabk.model.Pedido;
+package deliveryhamburgueriabk.service;
+import deliveryhamburgueriabk.model.Pedido;
 
 public class PedidoService {
     public void finalizarPedido(Pedido pedido) {
