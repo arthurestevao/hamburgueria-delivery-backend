@@ -2,6 +2,12 @@ package deliveryhamburgueriabk.model;
 
 import jakarta.persistence.*;
 
+import lombok.*;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 @Entity
 @Table(name = "entregador")
 public class Entregador {
@@ -19,27 +25,4 @@ public class Entregador {
     @Column(nullable = false)
     private String veiculo;
 
-    public Entregador(){}
-
-    public Entregador(String nome, String telefone, String veiculo) {
-        this.nome = nome;
-        this.telefone = telefone;
-        this.veiculo = veiculo;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public String getTelefone() {
-        return telefone;
-    }
-
-    public String getVeiculo() {
-        return veiculo;
-    }
 }

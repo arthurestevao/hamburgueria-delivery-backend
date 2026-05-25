@@ -2,8 +2,14 @@ package deliveryhamburgueriabk.model;
 
 import jakarta.persistence.*;
 
+import lombok.*;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 @Entity
-@Table(name = "cupom")
+@Table(name = "cupons")
 public class Cupom {
 
     @Id
@@ -15,23 +21,4 @@ public class Cupom {
 
     @Column(nullable = false)
     private double desconto;
-
-    public Cupom(){}
-
-    public Cupom(String codigo, double desconto) {
-        this.codigo = codigo;
-        this.desconto = desconto;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getCodigo() {
-        return codigo;
-    }
-
-    public double getDesconto() {
-        return desconto;
-    }
 }

@@ -1,8 +1,13 @@
 package deliveryhamburgueriabk.model;
 
-import deliveryhamburgueriabk.model.Produto;
 import jakarta.persistence.*;
 
+import lombok.*;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 @Entity
 @Table(name = "itens_pedido")
 public class ItemPedido {
@@ -12,11 +17,11 @@ public class ItemPedido {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "pedido_id", nullable = false)
+    @Column(nullable = false)
     private Pedido pedido;
 
     @ManyToOne
-    @JoinColumn(name = "produto_id", nullable = false)
+    @Column(nullable = false)
     private Produto produto;
 
     @Column(nullable = false)
@@ -25,42 +30,10 @@ public class ItemPedido {
     @Column(nullable = false)
     private double subtotal;
 
-    public ItemPedido(){}
-
-    public ItemPedido(Produto produto, int quantidade) {
-        this.produto = produto;
-        this.quantidade = quantidade;
-        this.subtotal = produto.getPreco() * quantidade;
-    }
-
     public double calcularSubtotal() {
         if (this.produto != null) {
             return this.produto.getPreco() * this.quantidade;
         }
         return 0.0;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public Produto getProduto() {
-        return produto;
-    }
-
-    public void setProduto(Produto produto) {
-        this.produto = produto;
-    }
-
-    public int getQuantidade() {
-        return quantidade;
-    }
-
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
-    }
-
-    public double getSubtotal() {
-        return subtotal;
     }
 }

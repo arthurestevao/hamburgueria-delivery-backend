@@ -1,12 +1,19 @@
 package deliveryhamburgueriabk.model;
-
-import deliveryhamburgueriabk.enums.FormaPagamento;
-import deliveryhamburgueriabk.enums.StatusPedido;
 import deliveryhamburgueriabk.enums.TipoPedido;
 import jakarta.persistence.*;
+import deliveryhamburgueriabk.enums.FormaPagamento;
+import deliveryhamburgueriabk.enums.StatusPedido;
+
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import lombok.*;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 @Entity
 @Table(name = "pedidos")
 public class Pedido {
@@ -15,33 +22,44 @@ public class Pedido {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "numero_pedido", nullable = false)
+    @Column(nullable = false)
+    private String usuario;
+
+    @Column(nullable = false)
     private int numeroPedido;
 
-    @Column(name = "valor_total", nullable = false)
+    @Column(nullable = false)
     private double valorTotal;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "forma_pagamento", nullable = false)
+    @Column(nullable = false)
     private FormaPagamento formaPagamento;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "status_pedido", nullable = false)
+    @Column(nullable = false)
     private StatusPedido statusPedido;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "tipo_pedido")
+    @Column(nullable = false)
     private TipoPedido tipoPedido;
+
+    @Column(nullable = false)
+    private double taxaEntrega;
+
+    @Column(nullable = false)
+    private String enderecoEntrega;
+
+    @ManyToMany
+    @Column(nullable = false)
+    private Cupom cupom;
 
     @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ItemPedido> itens = new ArrayList<>();
 
-    public Pedido(){}
+    @Column(nullable = false)
+    private LocalDateTime criadoEm;
 
-    public Pedido(int numeroPedido, FormaPagamento formaPagamento) {
-        this.numeroPedido = numeroPedido;
-        this.formaPagamento = formaPagamento;
-        this.statusPedido = StatusPedido.PENDENTE;
+    public Pedido(Usuario usuario, FormaPagamento formaPagamento) {
     }
 
     public void adicionarItem(ItemPedido item) {
@@ -49,41 +67,4 @@ public class Pedido {
         item.setPedido(this);
         valorTotal += item.getSubtotal();
     }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public int getNumeroPedido() {
-        return numeroPedido;
-    }
-
-    public double getValorTotal() {
-        return valorTotal;
-    }
-
-    public FormaPagamento getFormaPagamento() {
-        return formaPagamento;
-    }
-
-    public StatusPedido getStatusPedido() {
-        return statusPedido;
-    }
-
-    public void setStatusPedido(StatusPedido statusPedido) {
-        this.statusPedido = statusPedido;
-    }
-
-    public List<ItemPedido> getItens() {
-        return itens;
-    }
-
-    public void setItens(List<ItemPedido> itens) {
-        this.itens = itens;
-    }
-
 }

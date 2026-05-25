@@ -1,11 +1,17 @@
-package com.example.deliveryhamburgueriabk.model;
+package deliveryhamburgueriabk.model;
 
 import jakarta.persistence.*;
+import lombok.*;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 @Entity
 @Table(name = "produtos")
 public class Produto {
 
+    @Getter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -19,43 +25,7 @@ public class Produto {
     @Column(length = 500)
     private String descricao;
 
-    public Produto(){}
+    @Column(nullable = false)
+    private boolean disponivel = true;
 
-    public Produto(String nome, double preco, String descricao) {
-        this.nome = nome;
-        this.preco = preco;
-        this.descricao = descricao;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public double getPreco() {
-        return preco;
-    }
-
-    public void setPreco(double preco) {
-        this.preco = preco;
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
 }
