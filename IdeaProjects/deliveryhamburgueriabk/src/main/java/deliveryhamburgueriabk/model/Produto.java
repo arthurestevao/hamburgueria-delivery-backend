@@ -1,4 +1,4 @@
-package deliveryhamburgueriabk.model;
+package com.example.deliveryhamburgueriabk.model;
 
 import jakarta.persistence.*;
 
