@@ -1,8 +1,16 @@
 package deliveryhamburgueriabk.service;
 
-public class EntregaService {
-    public void realizarEntrega() {
+import deliveryhamburgueriabk.model.Pedido;
+import deliveryhamburgueriabk.service.interfaces.IEntregaService;
 
-        System.out.println("Pedido saiu para entrega");
+public class EntregaService implements IEntregaService {
+    @Override
+    public Pedido sairParaEntrega(Long pedidoId) {
+        return null;
+    }
+
+    @Override
+    public Pedido confirmarEntrega(Long pedidoId) {
+        return null;
     }
 }

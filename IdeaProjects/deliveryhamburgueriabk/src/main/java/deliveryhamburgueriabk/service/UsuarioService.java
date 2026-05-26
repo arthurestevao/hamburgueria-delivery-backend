@@ -1,11 +1,28 @@
 package deliveryhamburgueriabk.service;
 import deliveryhamburgueriabk.model.Usuario;
+import deliveryhamburgueriabk.service.interfaces.IUsuarioService;
 
-public class UsuarioService {
+import java.util.List;
 
-    public void cadastrarUsuario(Usuario usuario) {
+public class UsuarioService implements IUsuarioService {
 
-        System.out.println("Usuari cadastrado com sucesso");
-        System.out.println("Nome: " + usuario.getNome());
+    @Override
+    public Usuario cadastrar(Usuario usuario) {
+        return null;
+    }
+
+    @Override
+    public Usuario login(String email, String senha) {
+        return null;
+    }
+
+    @Override
+    public Usuario buscarPorId(Long id) {
+        return null;
+    }
+
+    @Override
+    public List<Usuario> listarTodos() {
+        return List.of();
     }
 }
