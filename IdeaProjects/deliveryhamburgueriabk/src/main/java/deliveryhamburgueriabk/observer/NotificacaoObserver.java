@@ -1,9 +1,7 @@
-package observer;
+package deliveryhamburgueriabk.observer;
 
-import event.PedidoStatusEvent;
+import deliveryhamburgueriabk.event.PedidoStatusEvent;
 import org.springframework.context.event.EventListener;
-
-import static deliveryhamburgueriabk.enums.StatusPedido.*;
 
 public class NotificacaoObserver {
 
