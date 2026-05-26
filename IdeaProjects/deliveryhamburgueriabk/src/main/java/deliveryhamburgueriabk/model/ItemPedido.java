@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 import lombok.*;
 
-@NoArgsConstructor
+
 @AllArgsConstructor
 @Getter
 @Setter
@@ -29,6 +29,12 @@ public class ItemPedido {
 
     @Column(nullable = false)
     private double subtotal;
+
+    public ItemPedido(Produto produto, int quantidade) {
+        this.produto = produto;
+        this.quantidade = quantidade;
+        this.subtotal = calcularSubtotal();
+    }
 
     public double calcularSubtotal() {
         if (this.produto != null) {
