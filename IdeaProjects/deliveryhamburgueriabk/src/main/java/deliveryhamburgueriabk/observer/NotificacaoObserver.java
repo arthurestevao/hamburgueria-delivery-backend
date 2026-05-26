@@ -1,13 +1,18 @@
 package deliveryhamburgueriabk.observer;
 
-import deliveryhamburgueriabk.event.PedidoStatusEvent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.event.EventListener;
+import org.springframework.stereotype.Component;
 
+@Component
 public class NotificacaoObserver {
 
+    private static final Logger logger = LoggerFactory.getLogger(NotificacaoObserver.class);
+
     @EventListener
-    public void onPedidoStatusAtualizado(PedidoStatusEvent event){
-        var pedido = event.getPedido();
+    public void onPedidoStatusAtualizado(PedidoStatusEvent evento){
+        var pedido = evento.getPedido();
 
         String mensagemCliente = switch (pedido.getStatusPedido()){
 
@@ -18,7 +23,7 @@ public class NotificacaoObserver {
             case CANCELADO -> "Seu pedido foi cancelado.";
         };
 
-        System.out.println("[NOTIFICAÇÃO - CLIENTE " + pedido.getUsuario() + "] " + mensagemCliente);
-        System.out.println("[NOTIFICACAO - ADMIN] Pedido: " + pedido.getId() + " atualizado para: " + pedido.getStatusPedido());
+        logger.info("[CLIENTE - {}] {}", pedido.getUsuario().getEmail(), mensagemCliente);
+        logger.info("[ADMIN] Pedido #{} -> status: {}", pedido.getId(), pedido.getStatusPedido());
     }
 }

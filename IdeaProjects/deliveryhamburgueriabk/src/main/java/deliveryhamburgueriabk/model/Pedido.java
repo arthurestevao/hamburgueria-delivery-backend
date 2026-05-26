@@ -3,11 +3,9 @@ import deliveryhamburgueriabk.enums.TipoPedido;
 import jakarta.persistence.*;
 import deliveryhamburgueriabk.enums.FormaPagamento;
 import deliveryhamburgueriabk.enums.StatusPedido;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-
 import lombok.*;
 
 @NoArgsConstructor
@@ -24,9 +22,6 @@ public class Pedido {
 
     @Column(nullable = false)
     private String usuario;
-
-    @Column(nullable = false)
-    private int numeroPedido;
 
     @Column(nullable = false)
     private double valorTotal;
@@ -59,8 +54,6 @@ public class Pedido {
     @Column(nullable = false)
     private LocalDateTime criadoEm;
 
-    public Pedido(Usuario usuario, FormaPagamento formaPagamento) {
-    }
 
     public void adicionarItem(ItemPedido item) {
         this.itens.add(item);

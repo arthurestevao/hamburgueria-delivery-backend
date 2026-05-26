@@ -1,8 +1,7 @@
 package deliveryhamburgueriabk.model;
-
 import jakarta.persistence.*;
-
 import lombok.*;
+import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -21,4 +20,14 @@ public class Cupom {
 
     @Column(nullable = false)
     private double desconto;
+
+    @Column(nullable = false)
+    private boolean freteGratis;
+
+    @Column(nullable = false)
+    private LocalDateTime validade;
+
+    @Column(nullable = false)
+    private boolean ativo;
+
 }
