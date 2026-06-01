@@ -2,8 +2,7 @@ package deliveryhamburgueriabk.exception;
 
 import java.time.LocalDateTime;
 
-// Essa é a estrutura padrão de resposta de erro retornada pela API.
-
+// estrutura padrão de resposta de erro retornada pela API.
 public class ErroResposta {
 
     private int status;

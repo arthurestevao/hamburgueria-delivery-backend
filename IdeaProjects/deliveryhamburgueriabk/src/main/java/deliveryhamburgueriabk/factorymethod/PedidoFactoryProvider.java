@@ -1,7 +1,9 @@
 package deliveryhamburgueriabk.factorymethod;
 
 import deliveryhamburgueriabk.enums.TipoPedido;
+import org.springframework.stereotype.Component;
 
+@Component
 public class PedidoFactoryProvider {
 
     private final PedidoEntregaFactory pedidoEntregaFactory;

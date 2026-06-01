@@ -10,6 +10,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/cupons")
 @CrossOrigin(origins = "*")
+
 public class CupomController {
 
     private final ICupomService cupomService;
@@ -24,7 +25,7 @@ public class CupomController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Cupom>> listarAtivos() {
+    public ResponseEntity<List<Cupom>> listarAtivos(){
         return ResponseEntity.ok(cupomService.listarAtivos());
     }
 

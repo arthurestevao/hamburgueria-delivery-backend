@@ -1,11 +1,10 @@
 package deliveryhamburgueriabk.model;
 
 import jakarta.persistence.*;
-
 import lombok.*;
 
-
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 @Entity
@@ -17,11 +16,11 @@ public class ItemPedido {
     private Long id;
 
     @ManyToOne
-    @Column(nullable = false)
+    @JoinColumn(name = "pedido_id", nullable = false)
     private Pedido pedido;
 
     @ManyToOne
-    @Column(nullable = false)
+    @JoinColumn(name = "produto_id", nullable = false)
     private Produto produto;
 
     @Column(nullable = false)

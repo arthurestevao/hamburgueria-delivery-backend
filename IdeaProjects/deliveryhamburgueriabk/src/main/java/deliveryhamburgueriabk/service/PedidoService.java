@@ -94,8 +94,10 @@ public class PedidoService implements IPedidoService {
 
     @Override
     public List<Pedido> historicoPorUsuario(Long usuarioId) {
-            return pedidoRepository.findByUsuarioId(usuarioId);
+        return pedidoRepository.findByUsuarioId(usuarioId);
     }
+
+    // métodos privados
 
     private Usuario buscarUsuario(Long usuarioId) {
         return usuarioRepository.findById(usuarioId)
@@ -138,5 +140,4 @@ public class PedidoService implements IPedidoService {
         pedido.setValorTotal(pedido.getValorTotal() - desconto);
         pedido.setCupom(cupom);
     }
-
 }

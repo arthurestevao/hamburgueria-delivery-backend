@@ -1,5 +1,6 @@
 package deliveryhamburgueriabk.controller;
 
+import deliveryhamburgueriabk.enums.Perfil;
 import deliveryhamburgueriabk.model.Usuario;
 import deliveryhamburgueriabk.service.interfaces.IUsuarioService;
 import jakarta.validation.Valid;
@@ -22,6 +23,7 @@ public class UsuarioController {
 
     @PostMapping("/registro")
     public ResponseEntity<Usuario> registrar(@Valid @RequestBody Usuario usuario) {
+        usuario.setPerfil(Perfil.CLIENTE);
         return ResponseEntity.status(HttpStatus.CREATED).body(usuarioService.cadastrar(usuario));
     }
 

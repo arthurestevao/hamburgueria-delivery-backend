@@ -1,4 +1,5 @@
 package deliveryhamburgueriabk.service;
+import deliveryhamburgueriabk.enums.Perfil;
 import deliveryhamburgueriabk.exception.RecursoNaoEncontradoException;
 import deliveryhamburgueriabk.exception.RegraDeNegocioException;
 import deliveryhamburgueriabk.model.Usuario;
@@ -6,9 +7,11 @@ import deliveryhamburgueriabk.repository.UsuarioRepository;
 import deliveryhamburgueriabk.service.interfaces.IUsuarioService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class UsuarioService implements IUsuarioService {
 
     private static final Logger logger = LoggerFactory.getLogger(UsuarioService.class);
@@ -49,5 +52,10 @@ public class UsuarioService implements IUsuarioService {
     @Override
     public List<Usuario> listarTodos() {
         return usuarioRepository.findAll();
+    }
+
+    @Override
+    public List<Usuario> listarPorPerfil(Perfil perfil) {
+        return usuarioRepository.findByPerfil(perfil);
     }
 }

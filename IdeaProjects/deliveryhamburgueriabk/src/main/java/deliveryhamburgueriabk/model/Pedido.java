@@ -20,32 +20,33 @@ public class Pedido {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private String usuario;
+    @ManyToOne
+    @JoinColumn(name = "usuario_id", nullable = false)
+    private Usuario usuario;
 
     @Column(nullable = false)
     private double valorTotal;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column(name = "forma_pagamento", nullable = false)
     private FormaPagamento formaPagamento;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column(name = "status_pedido", nullable = false)
     private StatusPedido statusPedido;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column(name = "tipo_pedido", nullable = false)
     private TipoPedido tipoPedido;
 
     @Column(nullable = false)
     private double taxaEntrega;
 
-    @Column(nullable = false)
+    @Column
     private String enderecoEntrega;
 
-    @ManyToMany
-    @Column(nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "cupom_id")
     private Cupom cupom;
 
     @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -54,10 +55,17 @@ public class Pedido {
     @Column(nullable = false)
     private LocalDateTime criadoEm;
 
+    public Pedido(Usuario usuario, FormaPagamento formaPagamento) {
+        this.usuario = usuario;
+        this.formaPagamento = formaPagamento;
+        this.statusPedido = StatusPedido.PENDENTE;
+        this.criadoEm = LocalDateTime.now();
+    }
 
     public void adicionarItem(ItemPedido item) {
         this.itens.add(item);
         item.setPedido(this);
         valorTotal += item.getSubtotal();
     }
+
 }

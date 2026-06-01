@@ -4,7 +4,9 @@ import deliveryhamburgueriabk.enums.StatusPedido;
 import deliveryhamburgueriabk.model.Pedido;
 import deliveryhamburgueriabk.service.interfaces.IEntregaService;
 import deliveryhamburgueriabk.service.interfaces.IPedidoService;
+import org.springframework.stereotype.Service;
 
+@Service
 public class EntregaService implements IEntregaService {
 
     private final IPedidoService pedidoService;

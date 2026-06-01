@@ -1,5 +1,6 @@
 package deliveryhamburgueriabk.service.interfaces;
 
+import deliveryhamburgueriabk.enums.Perfil;
 import deliveryhamburgueriabk.model.Usuario;
 
 import java.util.List;
@@ -9,4 +10,5 @@ public interface IUsuarioService {
     Usuario login(String email, String senha);
     Usuario buscarPorId(Long id);
     List<Usuario> listarTodos();
+    List<Usuario> listarPorPerfil(Perfil perfil);
 }

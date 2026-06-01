@@ -7,16 +7,17 @@ import deliveryhamburgueriabk.repository.CupomRepository;
 import deliveryhamburgueriabk.service.interfaces.ICupomService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
+@Service
 public class CupomService implements ICupomService {
 
     private static final Logger logger = LoggerFactory.getLogger(CupomService.class);
 
     private final CupomRepository cupomRepository;
-
 
     public CupomService(CupomRepository cupomRepository) {
         this.cupomRepository = cupomRepository;
@@ -33,7 +34,7 @@ public class CupomService implements ICupomService {
     }
 
     @Override
-    public List<Cupom> ListarAtivos() {
+    public List<Cupom> listarAtivos() {
         return cupomRepository.findAll().stream()
                 .filter(Cupom::isAtivo)
                 .toList();

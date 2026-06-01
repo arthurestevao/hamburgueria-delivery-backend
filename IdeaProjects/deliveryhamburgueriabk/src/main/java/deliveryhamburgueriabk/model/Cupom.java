@@ -1,6 +1,7 @@
 package deliveryhamburgueriabk.model;
 import jakarta.persistence.*;
 import lombok.*;
+
 import java.time.LocalDateTime;
 
 @NoArgsConstructor
@@ -29,5 +30,4 @@ public class Cupom {
 
     @Column(nullable = false)
     private boolean ativo;
-
 }

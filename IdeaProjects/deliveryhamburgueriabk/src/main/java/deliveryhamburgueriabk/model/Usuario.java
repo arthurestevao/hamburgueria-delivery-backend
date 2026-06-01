@@ -1,6 +1,11 @@
 package deliveryhamburgueriabk.model;
 
+import deliveryhamburgueriabk.enums.Perfil;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 
 @NoArgsConstructor
@@ -35,6 +40,10 @@ public class Usuario {
 
     @NotBlank(message = "Telefone é obrigatório.")
     @Column(nullable = false)
-    private String elefone;
+    private String telefone;
 
+    @NotNull(message = "Perfil é obrigatório.")
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Perfil perfil;
 }

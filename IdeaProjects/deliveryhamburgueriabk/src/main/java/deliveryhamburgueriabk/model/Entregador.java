@@ -16,13 +16,13 @@ public class Entregador {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private String nome;
-
-    @Column(nullable = false, unique = true)
-    private String telefone;
+    @OneToOne
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
 
     @Column(nullable = false)
     private String veiculo;
 
+    public Entregador(Usuario usuarioSalvo, String veiculo) {
+    }
 }

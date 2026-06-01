@@ -18,6 +18,7 @@ public class NotificacaoObserver {
 
             case PENDENTE -> "Seu pedido foi recebido.";
             case EM_PREPARO -> "Seu pedido está sendo preparado.";
+            case PRONTO -> "Seu pedido está pronto, aguardando retirada";
             case SAIU_PARA_ENTREGA -> "Seu pedido saiu para entrega.";
             case ENTREGUE -> "Pedido entrega. Bom apetite.";
             case CANCELADO -> "Seu pedido foi cancelado.";

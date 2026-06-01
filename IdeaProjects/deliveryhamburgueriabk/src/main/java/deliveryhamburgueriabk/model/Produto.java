@@ -1,6 +1,8 @@
 package deliveryhamburgueriabk.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
 import lombok.*;
 
 @NoArgsConstructor
@@ -23,7 +25,7 @@ public class Produto {
     @Column(nullable = false)
     private double preco;
 
-    @Column(length = 300)
+    @Column(length = 200)
     private String descricao;
 
     @Column(nullable = false)
@@ -31,5 +33,4 @@ public class Produto {
 
     @Column(name = "total_vendas", nullable = false)
     private int totalVendas = 0;
-
 }
