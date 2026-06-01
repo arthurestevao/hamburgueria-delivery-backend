@@ -5,6 +5,7 @@ import deliveryhamburgueriabk.enums.StatusPedido;
 import deliveryhamburgueriabk.enums.TipoPedido;
 import deliveryhamburgueriabk.exception.RecursoNaoEncontradoException;
 import deliveryhamburgueriabk.exception.RegraDeNegocioException;
+import deliveryhamburgueriabk.factorymethod.IPedido;
 import deliveryhamburgueriabk.factorymethod.PedidoFactoryProvider;
 import deliveryhamburgueriabk.model.*;
 import deliveryhamburgueriabk.observer.PedidoStatusEvent;
@@ -49,13 +50,18 @@ public class PedidoService implements IPedidoService {
 
     @Override
     @Transactional
-    public Pedido criar(Long usuarioId, TipoPedido tipoPedido, FormaPagamento formaPagamento, String enderecoEntrega, List<Long> produtoIds, String codigoCupom) {
+    public Pedido criar(Long usuarioId, TipoPedido tipoPedido, FormaPagamento formaPagamento,
+                        String enderecoEntrega, List<Long> produtoIds, String codigoCupom) {
 
         Usuario usuario = buscarUsuario(usuarioId);
 
-        Pedido pedido = factoryProvider.obter(tipoPedido).criarPedido(usuario, formaPagamento, enderecoEntrega);
+        Pedido pedido = new Pedido(usuario, formaPagamento);
+        pedido.setEnderecoEntrega(enderecoEntrega);
 
         adicionarItensPedido(pedido, produtoIds);
+
+        IPedido iPedido = factoryProvider.obter(tipoPedido).criarPedido(pedido);
+        iPedido.processar();
 
         if(codigoCupom != null && !codigoCupom.isBlank()){
             aplicarCupom(codigoCupom, pedido);
@@ -64,25 +70,22 @@ public class PedidoService implements IPedidoService {
         pedido.setValorTotal(pedido.getValorTotal() + pedido.getTaxaEntrega());
 
         Pedido salvo = pedidoRepository.save(pedido);
-        logger.info("Pedido criado: id={}, usuario={}, tipo={}, total=R${}", salvo.getId(), usuario.getEmail(), tipoPedido, salvo.getValorTotal());
+        logger.info("Pedido criado: id={}, usuario={}, tipo={}, subtotal=R${}, frete=R${}, total=R${}",
+                salvo.getId(), usuario.getEmail(), tipoPedido,
+                salvo.getValorTotal(), salvo.getTaxaEntrega(), salvo.calcularTotal());
 
         eventPublisher.publishEvent(new PedidoStatusEvent(this, salvo));
-
         return salvo;
     }
 
     @Override
     @Transactional
     public Pedido atualizarStatus(Long pedidoId, StatusPedido novoStatus) {
-
         Pedido pedido = buscarPorId(pedidoId);
         pedido.setStatusPedido(novoStatus);
-
         Pedido atualizado = pedidoRepository.save(pedido);
         logger.info("Status do pedido id={} atualizado para: {}", pedidoId, novoStatus);
-
         eventPublisher.publishEvent(new PedidoStatusEvent(this, atualizado));
-
         return atualizado;
     }
 
@@ -106,25 +109,15 @@ public class PedidoService implements IPedidoService {
 
     private void adicionarItensPedido(Pedido pedido, List<Long> produtoIds) {
         for (Long produtoId : produtoIds) {
-            Produto produto = buscarProdutoDisponivel(produtoId);
-            ItemPedido item = new ItemPedido(produto, 1);
-            pedido.adicionarItem(item);
-            atualizarTotalVendas(produto);
+            Produto produto = produtoRepository.findById(produtoId)
+                    .orElseThrow(() -> new RecursoNaoEncontradoException("Produto não encontrado: " + produtoId));
+            if (!produto.isDisponivel()) {
+                throw new RegraDeNegocioException("Produto indisponível: " + produto.getNome());
+            }
+            pedido.adicionarItem(new ItemPedido(produto, 1));
+            produto.setTotalVendas(produto.getTotalVendas() + 1);
+            produtoRepository.save(produto);
         }
-    }
-
-    private Produto buscarProdutoDisponivel(Long produtoId) {
-        Produto produto = produtoRepository.findById(produtoId)
-                .orElseThrow(() -> new RecursoNaoEncontradoException("Produto não encontrado: " + produtoId));
-        if (!produto.isDisponivel()) {
-            throw new RegraDeNegocioException("Produto indisponível: " + produto.getNome());
-        }
-        return produto;
-    }
-
-    private void atualizarTotalVendas(Produto produto) {
-        produto.setTotalVendas(produto.getTotalVendas() + 1);
-        produtoRepository.save(produto);
     }
 
     private void aplicarCupom(String codigo, Pedido pedido) {

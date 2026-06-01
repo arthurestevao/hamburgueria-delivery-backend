@@ -68,4 +68,8 @@ public class Pedido {
         valorTotal += item.getSubtotal();
     }
 
+    // retorna subtotal dos itens + taxa de entrega
+    public double calcularTotal() {
+        return valorTotal + taxaEntrega;
+    }
 }

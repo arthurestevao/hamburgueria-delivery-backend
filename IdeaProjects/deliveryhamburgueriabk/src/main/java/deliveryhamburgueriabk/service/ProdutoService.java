@@ -14,7 +14,6 @@ import java.util.List;
 public class ProdutoService implements IProdutoService {
 
     private static final Logger logger = LoggerFactory.getLogger(ProdutoService.class);
-
     private final ProdutoRepository produtoRepository;
 
     public ProdutoService(ProdutoRepository produtoRepository) {

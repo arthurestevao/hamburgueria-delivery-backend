@@ -18,20 +18,17 @@ import java.util.List;
 public class EntregadorService implements IEntregadorService {
 
     private static final Logger logger = LoggerFactory.getLogger(EntregadorService.class);
-
     private final EntregadorRepository entregadorRepository;
     private final UsuarioRepository usuarioRepository;
 
-    public EntregadorService(EntregadorRepository entregadorRepository,
-                             UsuarioRepository usuarioRepository) {
+    public EntregadorService(EntregadorRepository entregadorRepository, UsuarioRepository usuarioRepository) {
         this.entregadorRepository = entregadorRepository;
         this.usuarioRepository = usuarioRepository;
     }
 
     @Override
     @Transactional
-    public Entregador cadastrar(String nome, String email, String senha,
-                                String telefone, String endereco, String veiculo) {
+    public Entregador cadastrar(String nome, String email, String senha, String telefone, String endereco, String veiculo){
 
         if (usuarioRepository.existsByEmail(email)) {
             throw new RegraDeNegocioException("E-mail já cadastrado.");
@@ -48,9 +45,7 @@ public class EntregadorService implements IEntregadorService {
 
         Entregador entregador = new Entregador(usuarioSalvo, veiculo);
         Entregador salvo = entregadorRepository.save(entregador);
-
-        logger.info("Entregador cadastrado: {} (usuarioId={})",
-                usuarioSalvo.getEmail(), usuarioSalvo.getId());
+        logger.info("Entregador cadastrado: {} (usuarioId={})", usuarioSalvo.getEmail(), usuarioSalvo.getId());
 
         return salvo;
     }
@@ -63,8 +58,7 @@ public class EntregadorService implements IEntregadorService {
     @Override
     public Entregador buscarPorId(Long id) {
         return entregadorRepository.findById(id)
-                .orElseThrow(() -> new RecursoNaoEncontradoException(
-                        "Entregador não encontrado: " + id));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Entregador não encontrado: " + id));
     }
 
     @Override

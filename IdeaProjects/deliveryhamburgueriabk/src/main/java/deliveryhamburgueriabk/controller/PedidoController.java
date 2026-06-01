@@ -24,7 +24,6 @@ public class PedidoController {
 
     @PostMapping
     public ResponseEntity<Pedido> criar(@RequestBody Map<String, Object> body) {
-
         Long usuarioId        = Long.valueOf(body.get("usuarioId").toString());
         TipoPedido tipoPedido = TipoPedido.valueOf(body.get("tipoPedido").toString());
         FormaPagamento forma  = FormaPagamento.valueOf(body.get("formaPagamento").toString());

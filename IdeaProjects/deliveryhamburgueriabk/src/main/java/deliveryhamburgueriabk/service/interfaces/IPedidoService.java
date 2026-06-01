@@ -8,7 +8,6 @@ import deliveryhamburgueriabk.model.Pedido;
 import java.util.List;
 
 public interface IPedidoService {
-
     Pedido criar(Long usuarioId, TipoPedido tipoPedido, FormaPagamento formaPagamento, String enderecoEntrega, List<Long> produtoIds, String codigoCupom);
     Pedido atualizarStatus(Long pedidoId, StatusPedido novoStatus);
     Pedido buscarPorId(Long id);

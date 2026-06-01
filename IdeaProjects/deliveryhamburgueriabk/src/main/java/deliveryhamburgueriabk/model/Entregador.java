@@ -23,6 +23,8 @@ public class Entregador {
     @Column(nullable = false)
     private String veiculo;
 
-    public Entregador(Usuario usuarioSalvo, String veiculo) {
+    public Entregador(Usuario usuario, String veiculo) {
+        this.usuario = usuario;
+        this.veiculo = veiculo;
     }
 }

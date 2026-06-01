@@ -17,6 +17,7 @@ public class EntregaService implements IEntregaService {
 
     @Override
     public Pedido sairParaEntrega(Long pedidoId) {
+        System.out.println("Pedido saiu para entrega");
         return pedidoService.atualizarStatus(pedidoId, StatusPedido.SAIU_PARA_ENTREGA);
     }
 

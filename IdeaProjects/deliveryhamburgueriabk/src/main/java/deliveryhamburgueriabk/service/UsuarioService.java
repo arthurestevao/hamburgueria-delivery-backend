@@ -15,7 +15,6 @@ import java.util.List;
 public class UsuarioService implements IUsuarioService {
 
     private static final Logger logger = LoggerFactory.getLogger(UsuarioService.class);
-
     private final UsuarioRepository usuarioRepository;
 
     public UsuarioService(UsuarioRepository usuarioRepository) {
@@ -28,7 +27,7 @@ public class UsuarioService implements IUsuarioService {
             throw new RegraDeNegocioException("E-mail já cadastrado.");
         }
         Usuario salvo = usuarioRepository.save(usuario);
-        logger.info("Usuário cadastrado com sucesso: {}", salvo.getEmail());
+        logger.info("Usuário cadastrado: {}", salvo.getEmail());
         return salvo;
     }
 
