@@ -1,6 +1,7 @@
 package deliveryhamburgueriabk.controller;
 
 import deliveryhamburgueriabk.dto.request.LoginRequestDTO;
+import deliveryhamburgueriabk.dto.request.UsuarioRequestDTO;
 import deliveryhamburgueriabk.dto.response.UsuarioResponseDTO;
 import deliveryhamburgueriabk.enums.Perfil;
 import deliveryhamburgueriabk.model.Usuario;
@@ -23,7 +24,7 @@ public class UsuarioController {
     }
 
     @PostMapping("/registro")
-    public ResponseEntity<UsuarioResponseDTO> registrar(@Valid @RequestBody UsuarioResponseDTO dto) {
+    public ResponseEntity<UsuarioResponseDTO> registrar(@Valid @RequestBody UsuarioRequestDTO dto) {
         Usuario usuario = new Usuario();
         usuario.setNome(dto.nome());
         usuario.setEmail(dto.email());
