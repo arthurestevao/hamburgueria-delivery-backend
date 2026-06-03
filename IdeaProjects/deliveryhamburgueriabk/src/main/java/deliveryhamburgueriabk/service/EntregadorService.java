@@ -17,7 +17,7 @@ import java.util.List;
 @Service
 public class EntregadorService implements IEntregadorService {
 
-    private static final Logger logger = LoggerFactory.getLogger(EntregadorService.class);
+    static final Logger logger = LoggerFactory.getLogger(EntregadorService.class);
     private final EntregadorRepository entregadorRepository;
     private final UsuarioRepository usuarioRepository;
 

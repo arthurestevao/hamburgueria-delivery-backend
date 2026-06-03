@@ -100,6 +100,11 @@ public class PedidoService implements IPedidoService {
         return pedidoRepository.findByUsuarioId(usuarioId);
     }
 
+    @Override
+    public List<Pedido> listarPorStatus(StatusPedido status) {
+        return pedidoRepository.findByStatusPedido(status);
+    }
+
     // métodos privados
 
     private Usuario buscarUsuario(Long usuarioId) {

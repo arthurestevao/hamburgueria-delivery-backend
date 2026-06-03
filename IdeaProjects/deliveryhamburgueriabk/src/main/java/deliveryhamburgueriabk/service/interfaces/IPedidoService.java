@@ -12,4 +12,5 @@ public interface IPedidoService {
     Pedido atualizarStatus(Long pedidoId, StatusPedido novoStatus);
     Pedido buscarPorId(Long id);
     List<Pedido> historicoPorUsuario(Long usuarioId);
+    List<Pedido> listarPorStatus(StatusPedido status);
 }

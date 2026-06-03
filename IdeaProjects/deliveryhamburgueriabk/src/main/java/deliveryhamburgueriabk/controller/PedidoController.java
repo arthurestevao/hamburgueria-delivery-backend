@@ -52,6 +52,15 @@ public class PedidoController {
         return ResponseEntity.ok(PedidoResponseDTO.de(pedidoService.atualizarStatus(id, status)));
     }
 
+    @GetMapping("/status/{status}")
+    public ResponseEntity<List<PedidoResponseDTO>> listarPorStatus(@PathVariable StatusPedido status) {
+        List<PedidoResponseDTO> pedidos = pedidoService.listarPorStatus(status)
+                .stream()
+                .map(PedidoResponseDTO::de)
+                .toList();
+        return ResponseEntity.ok(pedidos);
+    }
+
     @GetMapping("/usuario/{usuarioId}")
     public ResponseEntity<List<PedidoResponseDTO>> historico(@PathVariable Long usuarioId) {
         List<PedidoResponseDTO> historico = pedidoService.historicoPorUsuario(usuarioId)
