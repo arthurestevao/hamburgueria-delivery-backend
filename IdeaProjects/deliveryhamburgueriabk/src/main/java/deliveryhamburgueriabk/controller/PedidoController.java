@@ -6,11 +6,15 @@ import deliveryhamburgueriabk.enums.FormaPagamento;
 import deliveryhamburgueriabk.enums.StatusPedido;
 import deliveryhamburgueriabk.enums.TipoPedido;
 import deliveryhamburgueriabk.model.Pedido;
+import deliveryhamburgueriabk.observer.NotificacaoObserver;
 import deliveryhamburgueriabk.service.interfaces.IPedidoService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
+
 import java.util.List;
 import java.util.Map;
 
@@ -40,6 +44,15 @@ public class PedidoController {
                 ));
     }
 
+    @GetMapping
+    public ResponseEntity<List<PedidoResponseDTO>> listarTodos() {
+        List<PedidoResponseDTO> pedidos = pedidoService.listarTodos()
+                .stream()
+                .map(PedidoResponseDTO::de)
+                .toList();
+        return ResponseEntity.ok(pedidos);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<PedidoResponseDTO> buscar(@PathVariable Long id) {
         return ResponseEntity.ok(PedidoResponseDTO.de(pedidoService.buscarPorId(id)));
@@ -48,7 +61,9 @@ public class PedidoController {
     @PatchMapping("/{id}/status")
     public ResponseEntity<PedidoResponseDTO> atualizarStatus(
             @PathVariable Long id,
-            @RequestParam StatusPedido status) {
+            @RequestBody Map<String, String> body) {
+
+        StatusPedido status = StatusPedido.valueOf(body.get("status"));
         return ResponseEntity.ok(PedidoResponseDTO.de(pedidoService.atualizarStatus(id, status)));
     }
 

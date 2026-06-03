@@ -13,4 +13,5 @@ public interface IPedidoService {
     Pedido buscarPorId(Long id);
     List<Pedido> historicoPorUsuario(Long usuarioId);
     List<Pedido> listarPorStatus(StatusPedido status);
+    List<Pedido> listarTodos();
 }
